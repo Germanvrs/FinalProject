@@ -6,7 +6,7 @@ const path = require('path');
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());  // Esto es necesario para manejar datos en formato JSON
+app.use(express.json());  
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -24,24 +24,24 @@ app.get('/', (req, res) => {
     res.render('prototype');  
 });
 
-// Ruta para registrar usuario
+
 app.post('/register', async (req, res) => {
     const { firstname, lastname, email, password } = req.body;
 
     try {
-        // Verificar si ya existe un usuario con el mismo correo
+       
         const existingUser = await User.findOne({ email });
 
         if (existingUser) {
             return res.json({ success: false, message: "El correo ya está registrado" });
         }
 
-        // Crear un nuevo usuario
+        
         const newUser = new User({ firstname, lastname, email, password });
         await newUser.save();
         console.log('Usuario registrado:', newUser);
 
-        // Responder con éxito
+       
         res.json({ success: true, message: "Usuario registrado con éxito" });
     } catch (error) {
         console.error('Error al registrar el usuario:', error);

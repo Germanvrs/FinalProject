@@ -112,7 +112,7 @@
             let score = 0;
 
             currentExam.forEach((q, index) => {
-                const answer = parseInt(form.get(`question${index}`)); // Obtener el valor de la opción seleccionada
+                const answer = parseInt(form.get(`question${index}`)); 
                 if (answer === q.correct) {
                     score++;
                 }

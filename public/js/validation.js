@@ -5,13 +5,13 @@ document.getElementById("registerForm").addEventListener("submit", (e) => {
     let valid = true;
 
     inputs.forEach((input) => {
-        input.classList.remove("is-invalid"); // Elimina el estado inválido
+        input.classList.remove("is-invalid"); 
     });
   
     inputs.forEach((input) => {
         if (!input.value.trim()) { 
             valid = false;
-            input.classList.add("is-invalid"); // Marca el campo como inválido
+            input.classList.add("is-invalid"); 
         }
     });
   

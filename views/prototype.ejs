@@ -33,7 +33,7 @@
         <div class="content">
             <h1>Bienvenido a Global Education</h1> 
             <p>¡Regístrate para comenzar!</p>
-            <!-- Formulario para registro -->
+   
             <form id="registerForm">
                 <input type="text" name="firstname" placeholder="First Name" required>
                 <input type="text" name="lastname" placeholder="Last Name" required>
@@ -46,17 +46,17 @@
 
     <script>
         document.getElementById("registerForm").addEventListener("submit", (e) => {
-            e.preventDefault();  // Evita que el formulario recargue la página
+            e.preventDefault();  
 
-            // Captura los valores del formulario
+            
             const firstname = document.querySelector('input[name="firstname"]').value;
             const lastname = document.querySelector('input[name="lastname"]').value;
             const email = document.querySelector('input[name="email"]').value;
             const password = document.querySelector('input[name="password"]').value;
 
-            // Verifica que los campos no estén vacíos
+            
             if (firstname && lastname && email && password) {
-                // Enviar datos al servidor usando fetch
+               
                 fetch('/register', {
                     method: 'POST',
                     headers: {
@@ -64,14 +64,14 @@
                     },
                     body: JSON.stringify({ firstname, lastname, email, password }),
                 })
-                .then(response => response.json())  // Espera la respuesta en formato JSON
+                .then(response => response.json())  
                 .then(data => {
                     if (data.success) {
                         alert('Usuario registrado con éxito!');
-                        // Limpiar el formulario después del registro
+                        
                         document.getElementById("registerForm").reset();
                     } else {
-                        alert(data.message);  // Muestra el mensaje de error (ej. "El correo ya está registrado")
+                        alert(data.message);  
                     }
                 })
                 .catch((error) => {

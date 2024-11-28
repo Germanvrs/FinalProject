@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     firstname: { type: String, required: true },
     lastname: { type: String, required: true },
-    email: { type: String, required: true, unique: true }, // Asegúrate de que sea único
+    email: { type: String, required: true, unique: true }, 
     password: { type: String, required: true },
-}, { collection: 'prototypes' });  // Ajusta el nombre de la colección si es necesario
+}, { collection: 'prototypes' });  
 
 const User = mongoose.model('User', userSchema);
 
