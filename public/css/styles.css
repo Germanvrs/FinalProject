@@ -14,7 +14,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    color: #333; 
+    color: #333; /* Color de texto por defecto */
 }
 
 .wrapper {
@@ -121,16 +121,16 @@ body {
 
 .content {
     text-align: center;
-    color: #333; 
-    background-color: rgba(255, 255, 255, 0.8); 
+    color: #333; /* Color de texto ajustado */
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo más suave y menos opaco */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-
+/* Fondo oscuro detrás de content */
 .wrapper {
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
     padding: 20px;
     border-radius: 10px;
 }
@@ -142,7 +142,7 @@ h1 {
 
 p {
     font-size: 1.2rem;
-    color: #333; 
+    color: #333; /* Color de texto para mejor contraste */
 }
 
 .card {
@@ -187,7 +187,7 @@ p {
     color: white;
 }
 
-
+/* Ajustes adicionales para mejorar la legibilidad */
 h1, h2, p {
     margin-bottom: 20px;
 }
@@ -195,7 +195,7 @@ h1, h2, p {
 .content p {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: #333; 
+    color: #333; /* Ajuste del color del texto */
 }
 
 .nav-menu ul li a {
