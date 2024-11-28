@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Prototype | Courses</title>
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="nav">
+            <div class="nav-logo">
+            </div>
+            <div class="nav-menu">
+                <ul>
+                    <li><a href="/" class="link">Home</a></li>
+                    <li><a href="/courses" class="link active">Courses</a></li>
+                    <li><a href="/quizzes&exam" class="link">Quizzes & Exams</a></li>
+                    <li><a href="/aboutus" class="link">About Us</a></li>
+                </ul>
+            </div>
+            <div class="nav-button">
+                <button class="btn whiteButton" id="loginBtn">Sign In</button>
+                <button class="btn" id="registerBtn">Sign Up</button>
+            </div>
+        </nav>
+
+        <div class="content">
+            <h1>Examenes Dispoibles</h1>
+            <p>Aquí podrás ver todos los examenes que ofrecemos.</p>
+
+            <div class="course-options">
+                <h2>Selecciona una materia para comenzar el examen:</h2>
+                <button class="btn" onclick="startExam('matematicas')">Matemáticas</button>
+                <button class="btn" onclick="startExam('espanol')">Español</button>
+                <button class="btn" onclick="startExam('geografia')">Geografía</button>
+            </div>
+
+            <div id="exam-container" style="display: none;">
+                <h2 id="exam-title"></h2>
+                <form id="exam-form">
+                    <div id="questions-container"></div>
+                    <button type="submit" class="btn">Enviar respuestas</button>
+                </form>
+                <div id="score" style="display: none;">
+                    <p>Tu puntuación es: <span id="score-value"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const exams = {
+            matematicas: [
+                { question: "¿Cuánto es 2 + 2?", options: ["3", "4", "5"], correct: 1 },
+                { question: "¿Cuánto es 3 * 3?", options: ["6", "8", "9"], correct: 2 },
+                { question: "¿Cuánto es 10 - 4?", options: ["7", "6", "5"], correct: 1 },
+                { question: "¿Cuánto es 12 / 3?", options: ["4", "5", "3"], correct: 0 },
+                { question: "¿Cuánto es 7 + 5?", options: ["11", "12", "13"], correct: 1 }
+            ],
+            espanol: [
+                { question: "¿Cómo se escribe correctamente?", options: ["Hola", "Holla", "Hóla"], correct: 0 },
+                { question: "¿Qué palabra está bien escrita?", options: ["Meser", "Mesero", "Mezaro"], correct: 1 },
+                { question: "¿Cómo se llama el autor de Don Quijote?", options: ["Miguel de Cervantes", "William Shakespeare", "Garcilaso de la Vega"], correct: 0 },
+                { question: "¿Qué significa la palabra 'correr'?", options: ["Caminar", "Saltar", "Ir rápidamente"], correct: 2 },
+                { question: "¿Qué es un sustantivo?", options: ["Una acción", "Un adjetivo", "Un nombre"], correct: 2 }
+            ],
+            geografia: [
+                { question: "¿Cuál es el continente donde está el desierto del Sahara?", options: ["Asia", "África", "Europa"], correct: 1 },
+                { question: "¿Cuál es el océano más grande?", options: ["Atlántico", "Índico", "Pacífico"], correct: 2 },
+                { question: "¿Qué país es el más grande del mundo?", options: ["Rusia", "China", "Canadá"], correct: 0 },
+                { question: "¿Cuál es la capital de España?", options: ["Barcelona", "Madrid", "Sevilla"], correct: 1 },
+                { question: "¿En qué continente está la Gran Muralla China?", options: ["Asia", "Europa", "América"], correct: 0 }
+            ]
+        };
+
+        let currentExam = [];
+
+        function startExam(subject) {
+            currentExam = exams[subject];
+            const examContainer = document.getElementById("exam-container");
+            const examTitle = document.getElementById("exam-title");
+            const questionsContainer = document.getElementById("questions-container");
+            const scoreContainer = document.getElementById("score");
+            const scoreValue = document.getElementById("score-value");
+
+            examTitle.textContent = `Examen de ${subject.charAt(0).toUpperCase() + subject.slice(1)}`;
+            questionsContainer.innerHTML = '';
+            currentExam.forEach((q, index) => {
+                const questionHTML = `
+                    <div class="question">
+                        <p>${q.question}</p>
+                        ${q.options.map((option, i) => `
+                            <label>
+                                <input type="radio" name="question${index}" value="${i}">
+                                ${option}
+                            </label><br>
+                        `).join('')}
+                    </div>
+                `;
+                questionsContainer.innerHTML += questionHTML;
+            });
+
+            examContainer.style.display = 'block';
+            scoreContainer.style.display = 'none';
+        }
+
+        document.getElementById("exam-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const form = new FormData(e.target);
+            let score = 0;
+
+            currentExam.forEach((q, index) => {
+                const answer = parseInt(form.get(`question${index}`)); // Obtener el valor de la opción seleccionada
+                if (answer === q.correct) {
+                    score++;
+                }
+            });
+
+            document.getElementById("score-value").textContent = `${score} de 5`;
+            document.getElementById("score").style.display = 'block';
+        });
+    </script>
+</body>
+</html>

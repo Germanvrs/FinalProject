@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Prototype | Courses</title>
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="nav">
+            <div class="nav-logo">
+            </div>
+            <div class="nav-menu">
+                <ul>
+                    <li><a href="/" class="link">Home</a></li>
+                    <li><a href="/courses" class="link active">Courses</a></li>
+                    <li><a href="/quizzes&exam" class="link">Quizzes & Exams</a></li>
+                    <li><a href="/aboutus" class="link">About Us</a></li>
+                </ul>
+            </div>
+            <div class="nav-button">
+                <button class="btn whiteButton" id="loginBtn">Sign In</button>
+                <button class="btn" id="registerBtn">Sign Up</button>
+            </div>
+        </nav>
+
+        <div class="content">
+            <h1>Selecciona tu Materia y Realiza un Examen</h1>
+            <p>Elige entre las siguientes materias y comienza a aprender.</p>
+
+            <div class="subject-container">
+                <div class="subject" id="matematicas">
+                    <h2>Matemáticas</h2>
+                    <p>Las matemáticas son una disciplina que estudia los números, las cantidades, las formas y las estructuras. Incluye operaciones básicas como suma, resta, multiplicación y división, así como conceptos más avanzados como álgebra, geometría y cálculo.</p>
+                    <button class="btn" onclick="startExam('matematicas')">Haz el Examen de Matemáticas</button>
+                </div>
+
+                <div class="subject" id="espanol">
+                    <h2>Español</h2>
+                    <p>El español es uno de los idiomas más hablados del mundo. Estudiar español involucra conocer su gramática, sintaxis, ortografía y literatura. Además, aprender vocabulario y cómo estructurar oraciones correctamente es fundamental.</p>
+                    <button class="btn" onclick="startExam('espanol')">Haz el Examen de Español</button>
+                </div>
+
+                <div class="subject" id="geografia">
+                    <h2>Geografía</h2>
+                    <p>La geografía es la ciencia que estudia la Tierra, los fenómenos naturales y las relaciones entre los seres humanos y su entorno. Se centra en el estudio de mapas, climas, continentes, países y ciudades, así como la población y los recursos naturales.</p>
+                    <button class="btn" onclick="startExam('geografia')">Haz el Examen de Geografía</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function startExam(subject) {
+            window.location.href = `/quizzes&exam?subject=${subject}`;
+        }
+    </script>
+</body>
+</html>

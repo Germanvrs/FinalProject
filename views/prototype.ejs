@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Prototype | Home</title>
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="nav">
+            <div class="nav-logo"></div>
+            <div class="nav-menu">
+                <ul>
+                    <li><a href="/" class="link">Home</a></li>
+                    <li><a href="/courses" class="link">Courses</a></li>
+                    <li><a href="/quizzes&exam" class="link">Quizzes & Exams</a></li>
+                    <li><a href="/aboutus" class="link">About Us</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-button">
+                <button class="btn whiteButton" id="loginBtn">Sign In</button>
+                <button class="btn" id="registerBtn">Sign Up</button>
+            </div>
+
+            <div class="nav-menu-btn">
+                <i class="bx bx-menu"></i>
+            </div>
+        </nav>
+
+        <div class="content">
+            <h1>Bienvenido a Global Education</h1> 
+            <p>¡Regístrate para comenzar!</p>
+            <!-- Formulario para registro -->
+            <form id="registerForm">
+                <input type="text" name="firstname" placeholder="First Name" required>
+                <input type="text" name="lastname" placeholder="Last Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit" id="registerBtn">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", (e) => {
+            e.preventDefault();  // Evita que el formulario recargue la página
+
+            // Captura los valores del formulario
+            const firstname = document.querySelector('input[name="firstname"]').value;
+            const lastname = document.querySelector('input[name="lastname"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+
+            // Verifica que los campos no estén vacíos
+            if (firstname && lastname && email && password) {
+                // Enviar datos al servidor usando fetch
+                fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ firstname, lastname, email, password }),
+                })
+                .then(response => response.json())  // Espera la respuesta en formato JSON
+                .then(data => {
+                    if (data.success) {
+                        alert('Usuario registrado con éxito!');
+                        // Limpiar el formulario después del registro
+                        document.getElementById("registerForm").reset();
+                    } else {
+                        alert(data.message);  // Muestra el mensaje de error (ej. "El correo ya está registrado")
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert("Error al registrar el usuario");
+                });
+            } else {
+                alert('Por favor completa todos los campos.');
+            }
+        });
+    </script>
+</body>
+</html>
